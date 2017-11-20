@@ -1,0 +1,110 @@
+<style>
+    .mymenu-right{
+        /*display: block;*/
+        float: left;
+        width: 15%;
+    }
+    .affixed-holder{
+        min-height: 279px;
+    }
+    .affixed{
+        z-index: 99;
+        width: 99%;
+    }
+    .categories{
+        background: white;
+        border: 1px solid #e6e6e6;
+        font-size: 12px;
+        position: relative;
+        border-top: 1px solid #d9d9d9;
+        border-radius: 4px 0 0 4px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .categories li.active {
+        border-right-color: #63D34A;
+    }
+    .categories li.active a{
+        color: #3c3c3e;
+    }
+    .categories li:hover{
+        border-right-color: #63D34A;
+
+    }
+    .categories li{
+        border-bottom: 1px solid #ededed;
+        border-right: 3px solid gray;
+        position: relative;
+        z-index: 99;
+        white-space: nowrap;
+        display: list-item;
+        text-align: -webkit-match-parent;
+    }
+    .categories li:first-child a{
+        border-top-left-radius: 3px;
+    }
+    .categories li a:hover{
+        border-right-color: #63D34A;
+        background: #63D34A;
+        color: white;
+        padding-right: 53px;
+    }
+    .categories li a{
+        height: 37px;
+        display: block;
+        padding: 9px 47px 9px 10px;
+        color: #404040;
+        white-space: nowrap;
+    }
+    .categories li.nb-vitrin.active a:before{
+        background-position: -56px -7px;
+    }
+    .categories li.nb-vitrin a:hover:before, .categories li.nb-vitrin a.active:before{
+        background-position: -56px -7px;
+    }
+    .categories li.nb-vitrin.active a:before,.categories li.nb-vitrin a:hover:before, .categories li.nb-vitrin a.active:before, .categories li.nb-vitrin a:before{
+        background-position: -56px -7px;
+    }
+    .categories li.active a:before,.categories li a:hover:before{
+        background-color: #333;
+    }
+    /*.categories li a*/
+    .categories li i{
+        display: block;
+    }
+    .categories li a i.fa{
+        transform: translate3d(0, 0, 0);
+        font-size: 18px;
+        position: absolute;
+        display: block;
+        width: 40px;
+        height: 40px;
+        background: #9c9c9c;
+        top: 0;
+        right: 0;
+        text-align: center;
+        line-height: 40px;
+        border-left: 1px solid #e0e0e0;
+        border-bottom: 3px solid #e0e0e0;
+    }
+    .categories li a i.fa:hover{
+        color: #fff;
+    }
+</style>
+
+<div class="mymenu-right">
+    <div class="sidebar">
+        <div class="affixed-holder" id="affixed-holder" style="height: 373px;">
+            <div class="affixed affix-top" id="affixed">
+                <div class="widget filtering-list-holder visible-lg">
+                    <div class="visible-lg">
+                        <ul class="categories" id="categories">
+                            <?php wp_nav_menu( array( 'menu' => 'sided-menu' ) ); ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
