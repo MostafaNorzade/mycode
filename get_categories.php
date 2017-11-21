@@ -1,7 +1,5 @@
 <?php
-
-$categories = get_categories ( $args );
-
+//define array before function
 $args = array(
     'type' => 'post',
     'child_of' => 0,
@@ -13,9 +11,12 @@ $args = array(
     'exclude' => '',
     'include' => '',
     'number' => '',
-    'taxonomy' => 'category',
+    'taxonomy' => 'category',//or other taxonomi
     'pad_counts' => false
 );
+$categories = get_categories ( $args );
+
+
 
 
 //=================================================
@@ -39,6 +40,37 @@ $category-> cat_name
 $category-> category_nicename
 $category-> category_parent
 
+
+<?php
+//----------------- Examle -----------------
+
+$args = array(
+    'orderby' => 'name',
+    'order' => 'ASC',
+    'taxonomy' => 'us_portfolio_category',
+);
+$categories = get_categories($args);
+?>
+
+<ul>
+    <li>
+        <?php
+        foreach ($categories as $category) {
+            $category_link = sprintf(
+                '<a href="%1$s" alt="%2$s">%3$s</a>',
+                esc_url(get_category_link($category->term_id)),
+                esc_attr(sprintf(__('View all posts in %s', 'textdomain'), $category->name)),
+                esc_html($category->name)
+            );
+
+            echo '<p>' . sprintf(esc_html__('Category: %s', 'textdomain'), $category_link) . '</p> ';
+            echo '<p>' . sprintf(esc_html__('Description: %s', 'textdomain'), $category->description) . '</p>';
+            echo '<p>' . sprintf(esc_html__('Post Count: %s', 'textdomain'), $category->count) . '</p>';
+            echo '<p>' . sprintf(esc_html__('Post slug: %s', 'textdomain'), $category->slug) . '</p>';
+        }
+        ?>
+    </li>
+</ul>
 
 
 
