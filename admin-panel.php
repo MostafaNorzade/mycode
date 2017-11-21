@@ -19,7 +19,7 @@ array_unshift($all_cats, "انتخاب دسته بندی");
 
 
 /*---------------------------------------------------
-create setting
+create setting and enque style&scripts
 ----------------------------------------------------*/
 function theme_settings_init(){
     register_setting( 'theme_settings', 'theme_settings' );
@@ -346,7 +346,7 @@ form > p.submit {
 //----------------------- Panel-script.js (functions.php directory) ----
 //======================================================================
 ?>
-jQuery(document).ready(function(){
+jQuery(document).ready(function()){
 jQuery('.all_options').slideUp();
 
 jQuery('.input_title h3').click(function(){
