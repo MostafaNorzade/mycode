@@ -12,46 +12,58 @@ Tags: bootstrap
 //------------- bloginfo('') ----------
 
 //خروجی این تابع مستقیما چاپ میشه و نیازی به اکو کردن نداریم .
-bloginfo('');  //name of site
-bloginfo('name'); //name of site
-boginfo('description');//description of site
-blogino('url') //url site --- www.exampel.com  or  localhost
-bloginfo('admin_email'); //admin email
-//example
+bloginfo('');             //name of site
+bloginfo('name');         //name of site
+boginfo('description');   //description of site
+blogino('url');           //url site --- www.exampel.com  or  localhost
+bloginfo('admin_email');  //admin email
 
+
+//example
 <a href="mailto:<?php bloginfo('admin_email'); >">ارسال ایمیل به مدیر</a>
 
-bloginfo('template_url'); //theme url ---localhost/wp-content/themes/mytheme
-bloginfo('stylesheet_url') //style.css url ---localhost/wp-content/themes/mytheme/style.css
-bloginfo('version'); // version of wordpress
-bloginfo('charset'); // charset of wordpress
-bloginfo('language'); // language of wordpress
+bloginfo('template_url');        //theme url ---localhost/wp-content/themes/mytheme
+bloginfo('stylesheet_url')       //style.css url ---localhost/wp-content/themes/mytheme/style.css
+bloginfo('version');             // version of wordpress
+bloginfo('charset');             // charset of wordpress
+bloginfo('language');            // language of wordpress
+
 
 //------------ get_blogingo('') -------------
 
-//ma inja tabei darim be name get_bloginfo() . tamame arguman hay bloginfo() ro migire. tefavotesh ine ke chizi ro baramon chap nemikone . faghat barmigardone . masalan : get_blogingo('name') hich chizi be ma neshon nemide . vali mitonim berizimesh to ye variable va ouno chap konim . 
+//ma inja tabei darim be name get_bloginfo() . tamame arguman hay bloginfo() ro migire. tefavotesh ine ke chizi ro baramon
+chap nemikone . faghat barmigardone . masalan : get_blogingo('name') hich chizi be ma neshon nemide . vali mitonim berizimesh
+to ye variable va ouno chap konim . 
+
 $name = get_bloginfo('name');
 echo $name;
 
-//-------------- MainLoop ---------
-//halghe asli wordpress mibashad . wordpress bar asas inke dar che safheie hastim miad yekseri query khodesh ejra mikone va lazem nist ma be database dastori bedim . masalan agar dar safhe index.php bashim , ye query mizane ke database yekseri etelaatte barmigardone . in etelaat ba maniLoop ghabe dastresi hast va mitonim behesh dastresi dashe bashim . dar index.php az tarighe mainLoop mitonim be akharin neveshte ha dastresi dashte bashim .
+
+//-------------- MainLoop -------------------
+
+//halghe asli wordpress mibashad . wordpress bar asas inke dar che safheie hastim miad yekseri query khodesh ejra mikone
+//va lazem nist ma be database dastori bedim . masalan agar dar safhe index.php bashim , ye query mizane ke database yekseri
+//etelaatte barmigardone . in etelaat ba maniLoop ghabele dastresi hast va mitonim behesh dastresi dashe bashim . dar //index.php az tarighe mainLoop mitonim be akharin neveshte ha dastresi dashte bashim .
 
 if(have_posts()){
     echo '</ul>';
     while(heve_posts()){
-	the_post();//amade mikone post haro
+	the_post();     //amade mikone post haro
 	echo '<li>';
-	the_title();//title post haro namayesh mide
+	the_title();    //title post haro namayesh mide
 	echo '</li>';
     echo'</ul>';
 }
 }else{
-
 echo 'نوشته ای وجود ندارد';
 }
 
-از قسمت تنظیمات وردپرس قابل تنظیم هست که تعداد آخرین نوشته ها در صفخه اصلی چندتا باشه . مثلا روی ۱۰ تنظیم میکنید که ۱۰ نوشته آخر رو در صفحه اصلی نشون بده و با mainloop بالا شما ۱۰ نوشته آخر رو در صفحه اصلی به صورت لیستی دارید .
-//---- the_title() -----
+//tedade akharin post haee ke ba mainloop na index.php namayesh dade mishe , az tarighe setting wordpress ghabele tanzim
+//shodan hast.
+
+
+//---------------- the_title() --------------
+
 نکته : از این تابع فقط در حلقه وردپرس میتونیم استفاده کنیم .خروجی این تابع مستقیما چاپ میشه و نیازی به اکو کردن نداریم .
 in tabe 3 ta parametr migire . the_title($before,$after,$echo)
 آخرین آرگومان به صورت بولین هست . یا false هست یا true . اگر false باشه تایتل چاپ نمیشه و اگر true باشه چاپ میشه . اولی هم باهاش مشخص میکنیم که قبل از عنوان چی باشه و با دومی هم تعیین میکنیم بعد از عنوان چی قرار بگیره . مثال زیر :
