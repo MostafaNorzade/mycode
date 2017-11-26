@@ -32,8 +32,8 @@ bloginfo('language');            // language of wordpress
 //------------ get_blogingo('') -------------
 
 //ma inja tabei darim be name get_bloginfo() . tamame arguman hay bloginfo() ro migire. tefavotesh ine ke chizi ro baramon
-chap nemikone . faghat barmigardone . masalan : get_blogingo('name') hich chizi be ma neshon nemide . vali mitonim berizimesh
-to ye variable va ouno chap konim . 
+//chap nemikone . faghat barmigardone . masalan : get_blogingo('name') hich chizi be ma neshon nemide . vali mitonim berizimesh
+//to ye variable va ouno chap konim . 
 
 $name = get_bloginfo('name');
 echo $name;
