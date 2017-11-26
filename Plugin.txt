@@ -3,3 +3,32 @@ Woo Checkout Field Editor Pro
 Reveal IDs
 YITH WooCommerce Social Login
 افزونه حرفه ای پیامک ووکامرس
+
+contactform
+WP Mail SMTP
+//tanzimat Contact Form
+info@chupshop.com
+[your-name] <info@chupshop.com>
+چاپ شاپ "[your-subject]"
+Reply-To: [your-email]
+از : [your-name] <[your-email]>
+موضوع: [your-subject]
+
+محتوای پیام :
+[your-message]
+
+-- 
+این ایمیل از فرم تماس در چاپ شاپ (http://chupshop.com) ارسال شده است.
+
+//tanzimate WP Mail SMTP
+info@chupshop.com
+چاپ شاپ
+ارسال همه ایمیل‌های وردپرس از طریق SMTP.
+ تنظیم مسیر برگشت برای مطابقت با ایمیل ارسال کننده
+ localhost
+ 587 or 25
+ بدون رمزگذاری
+ بله: از احراز هویت SMTP استفاده کن
+ info@chupshop.com
+ f1G
+ 
