@@ -43,17 +43,18 @@ function cloudways_save_extra_checkout_fields( $order_id, $posted ){
 add_action( 'woocommerce_checkout_update_order_meta', 'cloudways_save_extra_checkout_fields', 10, 2 );
 
 
+// ----------------------- Final Order Page (namayesh dar faktor) -----------------
 function cloudways_display_order_data( $order_id ){  ?>
-    <!--<h4><?php// _e( 'اطلاعات مربوط به پیام هدیه' ); ?></h4>
+    <h4><?php _e( 'اطلاعات مربوط به پیام هدیه' ); ?></h4>
     <table class="shop_table shop_table_responsive additional_info">
         <tbody>
         <tr>
-            <th style="width: 117px;"><?php// _e( 'پیام هدیه شما :' ); ?></th>
-            <td><?php// echo get_post_meta( $order_id, '_cloudways_text_field', true ); ?></td>
+            <th style="width: 117px;"><?php _e( 'پیام هدیه شما :' ); ?></th>
+            <td><?php echo get_post_meta( $order_id, '_cloudways_text_field', true ); ?></td>
         </tr>
 
         </tbody>
-    </table> -->
+    </table>
 <?php }
 add_action( 'woocommerce_thankyou', 'cloudways_display_order_data', 20 );
 add_action( 'woocommerce_view_order', 'cloudways_display_order_data', 20 );
