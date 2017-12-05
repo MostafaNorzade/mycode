@@ -40,9 +40,6 @@ echo wc_get_cart_url();
 echo get_permalink( get_option('woocommerce_myaccount_page_id') );
 
 
-//------------------ Price -----------
-woocommerce_template_loop_add_to_cart();
-
 
 //----------- is in stock -----------
 if ( $product->is_in_stock() ) { ?>
