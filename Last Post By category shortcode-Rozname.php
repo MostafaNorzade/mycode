@@ -7,7 +7,9 @@ function my_last_product_post()
 
 global $post;
 $args = array( 
-    'posts_per_page' => 100, 
+    'posts_per_page' => 100,
+    'orderby'          => 'name',
+    'order'            => 'ASC',
     'category' => 138
     );
 
