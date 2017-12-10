@@ -48,7 +48,7 @@ $args = array(
     'orderby' => 'name',
     'order' => 'ASC',
     'taxonomy' => 'us_portfolio_category',
-    'hide_empty' => 1,
+    'hide_empty' => 0,
     'child_of' => 55, //child and grandchild of cat with id 55
     'parent' => 55, //only child of cat with id 55
 );
