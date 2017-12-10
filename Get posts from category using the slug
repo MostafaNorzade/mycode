@@ -15,7 +15,7 @@ $categories = get_categories ( $args );
         ?>
 
         <div class="discount_other">
-            <div class="title_block"><span><?php echo'آخرین محصولات '. $name; ?></span></div>
+            <div class="title_block"><span><?php echo'آخرین تخفیف های '. $name; ?></span></div>
 
             <?php $args = array(
                 "posts_per_page" => 4,
