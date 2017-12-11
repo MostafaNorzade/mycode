@@ -72,10 +72,10 @@ add_action('save_post', 'olka_meta_box_save');
 		$args = array( 
     		'post_type' => 'post',
 			'tax_query' => array(
-				array(
-					'taxonomy' => 'category',
-					'field'    => 'slug',
-					'terms'    => 'rozname',
+			array(
+			'taxonomy' => 'category',
+			'field'    => 'slug',
+			'terms'    => 'rozname',
 		)
 	),
     );
