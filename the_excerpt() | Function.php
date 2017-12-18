@@ -1,5 +1,10 @@
 <?php
 
+
+//***********************************************
+//------------------ Functions.php --------------
+//***********************************************
+
 function template_excerpt( $template_content , $template_letter_count ){
     $template_striped_content = strip_shortcodes($template_content);
     $template_striped_content = strip_tags($template_striped_content);
@@ -9,3 +14,15 @@ function template_excerpt( $template_content , $template_letter_count ){
     }
     return $template_excerpt;
 }
+
+
+
+//***********************************************
+//------------------ Use code -------------------
+//***********************************************
+?>
+<div>
+    <p style="padding: 25px 10px;">
+        <?php echo  template_excerpt(get_the_excerpt(), 300); ?>
+    </p>
+</div>
