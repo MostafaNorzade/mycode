@@ -1,3 +1,10 @@
+<?php
+//***********************************************************************
+// ----https://wordpress.org/plugins/show-random-products/
+//***********************************************************************
+?>
+
+
 <div class="discount_other">
     <div class="title_block"><span><?php echo opt('index_other_discounts'); ?></span></div>
 
