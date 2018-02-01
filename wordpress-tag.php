@@ -2,11 +2,11 @@
 //------------ style.css ----------
 
 /*
-Theme Name: Start WordPress
-Author: Tania Rascia
+Theme Name: MN-theme
+Author: Mostafa Norzade
+Author URI: http://mostafanorzade.ir/
 Description: Bootstrap Blog template converted to WordPress
 Version: 0.0.1
-Tags: bootstrap
 */
 
 //------------- bloginfo('') ----------
