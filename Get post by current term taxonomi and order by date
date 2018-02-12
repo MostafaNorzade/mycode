@@ -3,21 +3,33 @@
         'tax_query' => array(
             array(
                 'taxonomy' => get_queried_object()->taxonomy,
-                'field' => 'id',
-                'terms' => get_queried_object()->id
+                'field' => 'slug',
+                'terms' => get_queried_object()->slug
             )
         ),
         'order'               => 'DESC',
         'orderby'             => 'date'
     );
-    
-    
     $wp_query = new WP_Query( $args );
 
     if($wp_query->have_posts()) {
         $counter = 100;
         while($wp_query->have_posts()) : $wp_query->the_post(); global $post,$product;
             get_template_part('partials/content-product');
-        endwhile;  
-        }
-?>
+        endwhile;  ?>
+
+        <div class="clear"></div>
+
+
+
+
+        <?php if ( $wp_query->max_num_pages > 1 ){?>
+            <div class="pagination_wrapper">
+                <div class="pagination">
+                    <?php echo my_pagination(); ?>
+                </div>
+            </div>
+        <?php } ?>
+    <?php } else { ?>
+        <p>محصولی موجود نمیباشد.</p>
+    <?php } ?>
