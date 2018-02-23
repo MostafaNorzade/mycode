@@ -1,0 +1,48 @@
+//------ Download this walker and paste in root theme -------------------
+https://github.com/wp-bootstrap/wp-bootstrap-navwalker
+
+
+//-------------- Functions.php ----------------------------------
+require_once get_template_directory() . '/wp-bootstrap-navwalker.php';
+
+
+
+//---------------- register Menu ----------------------------------
+function register_mn_menus() {
+    register_nav_menus(
+        array(
+            'top-menu' => __( ' فهرست بالا' ),
+            'footer-menu' => __( ' فهرست فوتر' )
+        )
+    );
+}
+add_action( 'init', 'register_mn_menus' );
+
+
+//----------------------------------------------------------------
+//------------------ header.php ----------------------------------
+//----------------------------------------------------------------
+
+
+<div class="col-xs-6 col-md-10 col-lg-10 right-box">
+    <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            <?php
+            wp_nav_menu( array(
+                'theme_location'    => 'top-menu',
+                'depth'             => 3,
+                'container'         => 'div',
+                'container_class'   => 'collapse navbar-collapse',
+                'container_id'      => 'bs-example-navbar-collapse-1',
+                'menu_class'        => 'nav navbar-nav',
+                'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+                'walker'            => new WP_Bootstrap_Navwalker()
+        ) );
+            ?>
+        </div>
+    </nav>
+</div>
