@@ -1,0 +1,269 @@
+Views, Templates, and Static Files
+در حال حاضر ما یک view داریم به نام home که سلام دنیا را نمایش می دهد و در صفحه اصلی app ما قرار دارد .
+
+myproject/urls.py
+
+from django.conf.urls import url
+from django.contrib import admin
+
+from boards import views
+
+urlpatterns = [
+    url(r'^$', views.home, name='home'),
+    url(r'^admin/', admin.site.urls),
+]
+
+
+
+
+boards/views.py
+
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse('Hello, World!') 
+
+
+به طور مثال میخوایم الان تمام تالار ها رو د رصفحه اصلی لیست کنیم . این فقط یک مثال هست تا کمی راه بیوفتید :
+
+boards/views.py
+from django.http import HttpResponse
+from .models import Board
+
+def home(request):
+    boards = Board.objects.all()
+    boards_names = list()
+
+    for board in boards:
+        boards_names.append(board.name)
+
+    response_html = '<br>'.join(boards_names)
+
+    return HttpResponse(response_html)
+
+
+نتیجه رو شما در عکس زیر می توانید ببینید :
+عکس شماره 22
+
+بزارید همین جا دست نگه داریم . چون هیچ گاه کدهای html را اینطوری رندر نمی کنیم . البته ذکر کردم که این فقط یک مثال خیلی ساده بود برای افزایش درک شما . 
+
+
+ایجاد بخش تمپلیت ها در پروژه جنگو ( Django Template )
+
+خب یک فولدر به اسم templates در پوشه پروژه و در کنار boards درست کنید . طبق عکس زیر :
+عکس 23
+
+حالا یک فایل html به اسم home.html درون فولدر تمپلیت درست کنید
+کدهای زیر را درون آن قرار دهید :
+templates/home.html
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+  </head>
+  <body>
+    <h1>Boards</h1>
+
+    {% for board in boards %}
+      {{ board.name }} <br>
+    {% endfor %}
+
+  </body>
+</html>
+
+در کدهای بالا ما میکس کردیم کدهای html را با یکسری کدهای خاص مثل {% for ... in ... %} و {{ variable }} .
+این تگ های خاص ، قسمتی از زبان تمپلیت جنگو می باشند . 
+مثلا به تگ {{ board.name }} دقت کنید . این تگ نام تالارهای ما را از دیتابیس گرفته و داخل حلقه for قرار می دهد . به این ترتیب ما لیستی از اسم تالارها را خواهیم داشت .
+قبل از استارت کردن سرور ما باید مسیر template های app خودمان را به جنگو معرفی کنیم . 
+فایل settings.py را باز کنید و بخش TEMPLATES را پیدا کنید و کدهای این بخش را به شکل زیر تغییر دهید :
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+اساس کاری که کردیم این است که در بخش DIRS ما ابتدا مسیر اصلی پروژه و در ادامه اون پوشه templates رو به عنوان دایرکتوری اصلی فایل های تمپلیت معرفی کردیم .
+
+شما می توانید به صورت زیر این مسیر ها رو ببینید :
+python manage.py shell
+
+from django.conf import settings
+
+settings.BASE_DIR
+'/Users/vitorfs/Development/myproject'
+
+import os
+
+os.path.join(settings.BASE_DIR, 'templates')
+'/Users/vitorfs/Development/myproject/templates'
+
+مشاهده کردید ؟ این 2 مسیر اشاره به دایرکتوری پروژه و پوشه تمپلیت پروژه ماست .
+
+
+حالا view خود را که home نام داشت را به صورت زیر تغییر دهید :
+
+boards/views.py
+
+from django.shortcuts import render
+from .models import Board
+
+def home(request):
+    boards = Board.objects.all()
+    return render(request, 'home.html', {'boards': boards})
+
+نتیجه رو در عکس زیر ببینید :
+عکس 24
+
+خب ما میخوایم یکم ظاهر صفحه اصلی رو بهتر کنیم . میخوایم از جدول استفاده کنیم .
+
+
+templates/home.html
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+  </head>
+  <body>
+    <h1>Boards</h1>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Board</th>
+          <th>Posts</th>
+          <th>Topics</th>
+          <th>Last Post</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for board in boards %}
+          <tr>
+            <td>
+              {{ board.name }}<br>
+              <small style="color: #888">{{ board.description }}</small>
+            </td>
+            <td>0</td>
+            <td>0</td>
+            <td></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
+
+
+عکس زیر نتیجه کدهای بالا خواهد بود
+عکس 25
+
+
+
+تست صفحه اصلی (Homepage)
+
+خب میخواهیم اولین تست خودمان را در پروژه انجام بدیم . برای این کار وارد فایل tests.py در برنامه boards شوید :
+
+boards/tests.py
+
+from django.core.urlresolvers import reverse
+from django.test import TestCase
+
+class HomeTests(TestCase):
+    def test_home_view_status_code(self):
+        url = reverse('home')
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+
+این یک نمونه بسیار ساده اما بسیار مفید است
+ما کد وضعیت پاسخ را آزمایش می کنیم. کد وضعیت 200 به معنای موفقیت است.
+
+ما میتونیم این کد وضعیت را ( status code ) در کنسول نگاه کنیم :
+عکس شماره 
+
+اگر یک استثناء نادیده گرفته شود یا خطای نحوی یا هر چیز دیگری رخ دهد، جنگو یک کد وضعیت 500 را به جای کد 200 ، یعنی خطای سرور داخلی ( Internal Server Error) ، بازمی گرداند.
+
+حالا تصور کنید سایت ما 200 تا view دارد.
+اگر ما فقط این تست ساده را برای تمام view های خود بنویسیم ، فقط با یک دستور ، ما قادر خواهیم بود تا تمام view ها یک کد موفقیت را بازگردانیم، بنابراین کاربر هر پیام خطایی را در هیچ جا نمی بیند.
+بدون تست خودکار، ما باید هر صفحه را یک به یک بررسی کنیم.
+برای اجرای تست ، کد زیر را در کنسول وارد نمایید :
+python manage.py test
+
+نتیجه :
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.041s
+
+OK
+Destroying test database for alias 'default'...
+
+
+اکنون می توانید تست کنید که جنگو تابع view درست برای URL درخواست شده را باز می گرداند یا نه
+
+
+فایل های استاتیک(Static Files)
+
+فایل های استاتیک CSS، جاوا اسکریپت ها، فونت ها، تصاویر، یا هر گونه منابع دیگر که ما برای ساختن رابط کاربر می توانیم استفاده کنیم.
+
+
+
+با استفاده از بسیاری از کتابخانه های مجهز به فرانت اند ، هیچ دلیلی برای رندر اسناد اسناد HTML وجود ندارد. ما به راحتی می توانیم بوت استرپ 4 را به پروژهمان اضافه کنیم. بوت استرپ مجموعه ابزار منبع باز برای توسعه با HTML، CSS و جاوا اسکریپت است.
+
+در دایرکتوری پروژه خود در کنار فولدر های boards و templates یک فولدر به نام static ایجاد کنید و یک فولدر در داخل این فولدر استاتیک ایجاد کنید به نام css .
+حالا به سایت بوت استرپ رفته و آخرین نسخه آن را دانلود کنید .
+
+ getbootstrap.com
+
+عکس مربوطه
+
+
+فایل js و css بوت استرپ را دانلود کنید . 
+فایل bootstrap.min.css را در پوشه css خود کپی کنید .
+
+قدم بعدی این است که مثل تمپلیت ها باید استاتیک ها رو نیز به جنگو معرفی کنیم .
+
+فایل settings.py را باز کرده به انتهای فایل بروید تا به بخش STATIC_URL = '/static/' برسید . این بخش رو همانند کدهای زیر تغییر دهید :
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+حالا به راحتی می توانید از فایل های استاتیک خود در template ها استفاده کنید .
+به کد زیر دقت کنید
+templates/home.html
+
+
+{% load static %}<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+    <!-- body suppressed for brevity ... -->
+  </body>
+</html>
+
+ما برای اینکه بتوانیم از تگ های تمپلیت مربوط به فایل های استاتیک app خودمان استفاده کنیم ، باید در ابتدای فایل تمپلیت خود از تگ {% load static %} استفاده کنیم .
