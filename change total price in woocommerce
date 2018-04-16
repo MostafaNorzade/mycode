@@ -1,0 +1,10 @@
+<?php
+
+function prefix_add_discount_line( $cart ) {
+
+    $discount = $cart->subtotal * 0.9;
+
+    $cart->add_fee( __( ' مبلغی که باید به صورت نقدی به فروشنده پرداخت کنید', 'yourtext-domain' ) , -$discount );
+
+}
+add_action( 'woocommerce_cart_calculate_fees', 'prefix_add_discount_line' );
