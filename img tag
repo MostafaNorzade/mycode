@@ -1,0 +1,1 @@
+<img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="<?php echo get_post_meta( get_post_thumbnail_id( get_the_ID() ), '_wp_attachment_image_alt', true); ?>">

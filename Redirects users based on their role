@@ -1,0 +1,10 @@
+function cm_redirect_users_by_role() {
+
+    $current_user   = wp_get_current_user();
+    $role_name      = $current_user->roles[0];
+
+    if ( $role_name !== 'administrator') {
+        wp_redirect( home_url( 'profile' ));
+    }
+} 
+add_action( 'admin_init', 'cm_redirect_users_by_role' );

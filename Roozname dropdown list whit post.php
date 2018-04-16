@@ -80,8 +80,17 @@ add_action('save_post', 'olka_meta_box_save');
 	),
     );
 
-		$myposts = get_posts( $args ); ?>
-<select style="font-family: IRANSansWeb_Light;font-size: 15px;border: 1px solid #ddd;border-radius: 5px;font-weight: 600;" onchange="javascript:location.href = this.value;">	
+$myposts = get_posts( $args ); ?>
+	    
+<script>
+	$(document).ready(function(){
+		$('body').on('change', '#ua_xxsdf', function(){
+			$(this).find('option[value="0"]').remove();
+		});
+	});
+</script>
+	    
+<select id="ua_xxsdf" style="font-family: IRANSansWeb_Light;font-size: 15px;border: 1px solid #ddd;border-radius: 5px;font-weight: 600;" onchange="javascript:location.href = this.value;">	
 <?php 
 	foreach ( $myposts as $post ) : setup_postdata( $post ); ?>
 	<option style="font-family: IRANSansWeb_Light;" value="<?php echo get_post_meta(get_the_ID(), 'olka1_textfield', true); ?>"><?php the_title(); ?></option>

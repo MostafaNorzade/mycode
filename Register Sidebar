@@ -1,0 +1,40 @@
+<?php
+//***********************************************************
+//------------------ Functions.php --------------------------
+//***********************************************************
+
+function my_custom_sidebar() {
+    register_sidebar(
+        array (
+            'name' => __( 'سایدبار صفحات آرشیو و دسته ها', 'your-theme-domain' ),
+            'id' => 'custom-side-bar',
+            'description' => __( 'در این بخش میتوانید ابزارک مورد نیاز خود را کشیده و در این قسمت رها کنید .', 'your-theme-domain' ),
+            'before_widget' => '<div class="widget-content">',
+            'after_widget' => "</div>",
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>',
+        )
+    );
+}
+add_action( 'widgets_init', 'my_custom_sidebar' );
+
+
+//***********************************************************
+//------------------ sidebar-homepage.php -------------------
+//***********************************************************
+<div class="col-md-3 col-lg-3" id="sidebar">
+	<ul>
+		<?php
+		if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('custom-side-bar') ) :
+		endif; ?>
+	</ul>
+</div>
+
+
+//***********************************************************
+//------------------------ Use in code ----------------------
+//***********************************************************
+<div class="col-lg-3 col-md-3 hidden-sm hidden-xs" style="border: 1px solid #ddd;">
+    <?php dynamic_sidebar( 'custom-side-bar' ); ?>
+</div>
+

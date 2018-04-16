@@ -1,0 +1,26 @@
+<?php
+
+//-------- khate akhar mohem ast -----------------
+
+register_post_type(
+			'us_portfolio', array(
+				'labels' => array(
+					'name' => __( 'Portfolio', 'us' ),
+					'singular_name' => __( 'Portfolio Page', 'us' ),
+					'all_items' => __( 'Portfolio Pages', 'us' ),
+					'add_new' => __( 'Add Portfolio Page', 'us' ),
+					'add_new_item' => __( 'Add Portfolio Page', 'us' ),
+					'edit_item' => __( 'Edit Portfolio Page', 'us' ),
+					'view_item' => us_translate( 'View Page' ),
+					'not_found' => us_translate( 'No pages found.' ),
+					'not_found_in_trash' => us_translate( 'No pages found in Trash.' ),
+				),
+				'public' => TRUE,
+				'rewrite' => $portfolio_rewrite,
+				'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'comments' ),
+				'capability_type' => array( 'us_portfolio', 'us_portfolios' ),
+				'map_meta_cap' => TRUE,
+				'menu_icon' => 'dashicons-images-alt',
+				'register_meta_box_cb' => 'beh_add_price_metaboxes',
+			)
+		);
